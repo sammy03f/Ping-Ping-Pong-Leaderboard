@@ -6,7 +6,8 @@ let players = [
 {name:"Sonny", rating:1000},
 {name:"JJ", rating:1000},
 {name:"Ramji", rating:1000},
-{name:"Aadi (squid)", rating:1000}
+{name:"Aadi (squid)", rating:1000},
+{name:"Jasper", rating:1000}
 ]
 
 const K = 32
