@@ -2,11 +2,10 @@ let players = [
 {name:"Sammy", rating:1000},
 {name:"Kabir", rating:1000},
 {name:"Bubnack", rating:1000},
-{name:"Aaron", rating:1000}
-{name:"Sonny", rating:1000}
-{name:"JJ", rating:1000}
+{name:"Aaron", rating:1000},
+{name:"Sonny", rating:1000},
+{name:"JJ", rating:1000},
 {name:"Ramji", rating:1000}
-
 ]
 
 const K = 32
