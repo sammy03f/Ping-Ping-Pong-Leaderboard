@@ -1,6 +1,9 @@
-// load players from storage or create default list
+// -----------------------------
+// Default player roster
+// Add new players here anytime
+// -----------------------------
 
-let players = JSON.parse(localStorage.getItem("players")) || [
+let defaultPlayers = [
 {name:"Sammy", rating:1000},
 {name:"Kabir", rating:1000},
 {name:"Bubnack", rating:1000},
@@ -15,6 +18,34 @@ let players = JSON.parse(localStorage.getItem("players")) || [
 {name:"Mallinger", rating:1000}
 ]
 
+// -----------------------------
+// Load saved ratings
+// -----------------------------
+
+let players = JSON.parse(localStorage.getItem("players")) || []
+
+// -----------------------------
+// Merge new players with saved ones
+// -----------------------------
+
+defaultPlayers.forEach(newPlayer => {
+
+let exists = players.find(p => p.name === newPlayer.name)
+
+if(!exists){
+players.push(newPlayer)
+}
+
+})
+
+// Save updated list
+localStorage.setItem("players", JSON.stringify(players))
+
+
+// -----------------------------
+// Elo configuration
+// -----------------------------
+
 const K = 32
 
 
@@ -22,6 +53,10 @@ function expectedScore(Ra,Rb){
 return 1/(1+Math.pow(10,(Rb-Ra)/400))
 }
 
+
+// -----------------------------
+// Update Elo after match
+// -----------------------------
 
 function updateElo(playerA,playerB,winner){
 
@@ -34,10 +69,14 @@ let Sb = winner === "B" ? 1 : 0
 playerA.rating = Math.round(playerA.rating + K*(Sa-Ea))
 playerB.rating = Math.round(playerB.rating + K*(Sb-Eb))
 
-// save updated ratings
 localStorage.setItem("players", JSON.stringify(players))
+
 }
 
+
+// -----------------------------
+// Render leaderboard
+// -----------------------------
 
 function renderLeaderboard(){
 
@@ -64,6 +103,10 @@ populatePlayers()
 }
 
 
+// -----------------------------
+// Populate dropdown menus
+// -----------------------------
+
 function populatePlayers(){
 
 let a = document.getElementById("playerA")
@@ -81,6 +124,10 @@ b.innerHTML += `<option value="${i}">${p.name}</option>`
 
 }
 
+
+// -----------------------------
+// Handle match submission
+// -----------------------------
 
 document.getElementById("matchForm").addEventListener("submit",function(e){
 
@@ -103,5 +150,9 @@ renderLeaderboard()
 
 })
 
+
+// -----------------------------
+// Initial page load
+// -----------------------------
 
 renderLeaderboard()
